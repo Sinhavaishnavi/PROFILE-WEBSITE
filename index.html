@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaishnavi Sinha - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FBFBEA;
+            /* Light yellow background */
+            color: #333333;
+            /* Dark gray text */
+            overflow-x: hidden;
+            /* Prevent horizontal scroll due to animations */
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gradient-text {
+            /* Re-purposed for dark blue headings */
+            color: #1A2B4D;
+            /* Deep navy blue */
+        }
+
+        .card {
+            background-color: #ffffff;
+            /* White background for cards */
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            /* Lighter shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+            /* Light border for definition */
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            /* Slightly stronger shadow on hover */
+        }
+
+        .skill-item {
+            background-color: #FFFACD;
+            /* Light yellow for skill items */
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #1A2B4D;
+            /* Dark blue text for skills */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .skill-item:hover {
+            background-color: #FFECB3;
+            /* Slightly darker yellow on hover */
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: #FFFACD;
+            /* Light yellow button */
+            color: #1A2B4D;
+            /* Dark blue text */
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 5px 15px rgba(255, 236, 179, 0.6);
+            /* Yellowish shadow */
+            border: 1px solid #FFD700;
+            /* Subtle yellow border */
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 236, 179, 0.8);
+        }
+
+        /* Adjusted text colors for the new scheme */
+        .text-main-dark {
+            /* Used for general dark text */
+            color: #333333;
+        }
+
+        .text-accent-dark {
+            /* Used for links and icons */
+            color: #1A2B4D;
+        }
+
+        .text-accent-dark:hover {
+            color: #2C3E50;
+            /* Slightly different dark blue on hover */
+        }
+
+        .text-light-note {
+            /* Used for small notes */
+            color: #666666;
+            /* Medium gray */
+        }
+
+        .text-card-heading {
+            /* Used for headings in cards */
+            color: #1A2B4D;
+            /* Deep navy blue */
+        }
+
+        /* Animations */
+        .animate-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-scale-in.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-slide-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-slide-left {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-slide-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Hero section specific styling */
+        .hero-image-container {
+            position: relative;
+            width: 300px;
+            /* Adjust as needed */
+            height: 300px;
+            /* Adjust as needed */
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-decorative-element {
+            position: absolute;
+            font-size: 4rem;
+            /* Adjust size of plus signs */
+            color: #FFD700;
+            /* Gold color for accents */
+            opacity: 0.7;
+            animation: pulse 2s infinite alternate;
+        }
+
+        .hero-decorative-element.top-right {
+            top: 10%;
+            right: 10%;
+            transform: rotate(25deg);
+        }
+
+        .hero-decorative-element.bottom-left {
+            bottom: 15%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+
+        .hero-decorative-lines {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 4px solid #FFD700;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: rotate 8s linear infinite;
+        }
+
+        .hero-decorative-lines.lines-1 {
+            top: 20%;
+            left: 5%;
+            transform: rotate(45deg);
+        }
+
+        .hero-decorative-lines.lines-2 {
+            bottom: 10%;
+            right: 15%;
+            transform: rotate(-30deg);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Section dividers */
+        .section-divider {
+            height: 50px;
+            background-color: #FBFBEA;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 120%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFFACD 25%, transparent 25%) -50px 0,
+                linear-gradient(225deg, #FFFACD 25%, transparent 25%) -50px 0,
+                linear-gradient(315deg, #FFFACD 25%, transparent 25%) 0 0,
+                linear-gradient(45deg, #FFFACD 25%, transparent 25%) 0 0;
+            background-size: 100px 50px;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white p-4 shadow-lg fixed w-full z-50 border-b border-gray-200">
+        <div class="container flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-accent-dark">Vaishnavi Sinha</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-accent-dark hover:text-gray-700 transition duration-300">About</a>
+                <a href="#education" class="text-accent-dark hover:text-gray-700 transition duration-300">Education</a>
+                <a href="#experience"
+                    class="text-accent-dark hover:text-gray-700 transition duration-300">Experience</a>
+                <a href="#projects" class="text-accent-dark hover:text-gray-700 transition duration-300">Projects</a>
+                <a href="#skills" class="text-accent-dark hover:text-gray-700 transition duration-300">Skills</a>
+                <a href="#contact" class="text-accent-dark hover:text-gray-700 transition duration-300">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-button" class="text-accent-dark hover:text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-lg shadow-md">
+            <a href="#about" class="block py-2 px-4 text-accent-dark hover:bg-gray-100 rounded-md">About</a>
+            <a href="#education" class="block py-2 px-4 text-accent-dark hover:bg-gray-100 rounded-md">Education</a>
+            <a href="#experience" class="block py-2 px-4 text-accent-dark hover:bg-gray-100 rounded-md">Experience</a>
+            <a href="#projects" class="block py-2 px-4 text-accent-dark hover:bg-gray-100 rounded-md">Projects</a>
+            <a href="#skills" class="block py-2 px-4 text-accent-dark hover:bg-gray-100 rounded-md">Skills</a>
+            <a href="#contact" class="block py-2 px-4 text-accent-dark hover:bg-gray-100 rounded-md">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero"
+        class="h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left bg-cover bg-center relative"
+        style="background-color: #FBFBEA;">
+        <div
+            class="container relative z-10 flex flex-col md:flex-row items-center justify-center md:justify-between space-y-10 md:space-y-0 md:space-x-10">
+            <div class="w-full md:w-1/2 animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-4 text-main-dark">
+                    Hi, I'm <span class="gradient-text">Vaishnavi Sinha</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-main-dark mb-8" style="animation-delay: 0.3s;">
+                    4th year B.Tech, Computer Science & Engineering (Artificial Intelligence)
+                </p>
+                <a href= "resume/Vaishnavisinha4th.pdf"
+                tool\Vaishnavisinha4th1.pdf" download="Vaishnavisinha4th1.pdf"
+                    class="btn-primary inline-block" style="animation-delay: 0.6s;">
+                    <i class="fas fa-download mr-2"></i> Download Resume
+                </a>
+                <p class="text-sm text-light-note mt-4">
+                </p>
+            </div>
+            <div class="w-full md:w-1/2 flex justify-center items-center relative animate-fade-in"
+                style="animation-delay: 0.9s;">
+                <div class="hero-image-container">
+                    <img src="https://placehold.co/400x400/FFFACD/1A2B4D?text=Vaishnavi+Sinha"
+                        alt="Vaishnavi Sinha Profile" class="object-cover">
+                </div>
+                <!-- Decorative elements -->
+                <span class="hero-decorative-element top-right">+ + +</span>
+                <span class="hero-decorative-element bottom-left">/ / /</span>
+                <div class="hero-decorative-lines lines-1"></div>
+                <div class="hero-decorative-lines lines-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding" style="background-color: #FBFBEA;">
+        <div class="container animate-fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Summary</h2>
+            <div class="md:flex items-center justify-center md:space-x-12">
+                <div class="md:w-1/3 mb-8 md:mb-0 animate-scale-in">
+                    <img src="https://placehold.co/400x400/FFFACD/1A2B4D?text=Vaishnavi+Sinha" alt="Vaishnavi Sinha"
+                        class="rounded-full w-64 h-64 mx-auto object-cover shadow-lg border-4 border-accent-dark">
+                </div>
+                <div class="md:w-2/3 text-lg leading-relaxed text-main-dark animate-slide-left">
+                    <p class="mb-4">
+                        A passionate and driven 4th-year B.Tech student specializing in Artificial Intelligence, with
+                        hands-on experience in Machine Learning and Web Development. Proven ability to design and
+                        implement innovative systems using modern technologies like TensorFlow, OpenCV, Flask, and
+                        JavaScript.
+                    </p>
+                    <p>
+                        Eager to leverage strong programming, analytical, and problem-solving skills to contribute to
+                        cutting-edge projects and drive impactful solutions in the tech industry.
+                    </p>
+                    <div class="mt-8 flex justify-center md:justify-start space-x-6">
+                        <a href="https://github.com/Sinhavaishnavi" target="_blank"
+                            class="text-accent-dark hover:text-gray-700 text-3xl transition duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vaishnavi-sinha-952111259/" target="_blank"
+                            class="text-accent-dark hover:text-gray-700 text-3xl transition duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:vaishnavisinha476@gmail.com"
+                            class="text-accent-dark hover:text-gray-700 text-3xl transition duration-300">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Education Section -->
+    <section id="education" class="section-padding" style="background-color: #FBFBEA;">
+        <div class="container animate-fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Education</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card animate-slide-right">
+                    <h3 class="text-2xl font-semibold mb-2 text-card-heading">Bachelor of Technology</h3>
+                    <p class="text-main-dark mb-1">Computer Science & Engineering (Artificial Intelligence)</p>
+                    <p class="text-main-dark mb-2">ABES Institute of Technology, Ghaziabad</p>
+                    <p class="text-main-dark">2022 – 2026 | GPA: 7.89/10</p>
+                </div>
+                <div class="card animate-slide-left">
+                    <h3 class="text-2xl font-semibold mb-2 text-card-heading">12th (Senior Secondary Examination)</h3>
+                    <p class="text-main-dark mb-2">Central Board of Secondary Education</p>
+                    <p class="text-main-dark">2022 | Percentage: 78%</p>
+                </div>
+                <div class="card md:col-span-2 animate-fade-in">
+                    <h3 class="text-2xl font-semibold mb-2 text-card-heading">10th (Secondary Examination)</h3>
+                    <p class="text-main-dark mb-2">Central Board of Secondary Education</p>
+                    <p class="text-main-dark">2020 | Percentage: 80%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="section-padding" style="background-color: #FBFBEA;">
+        <div class="container animate-fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Work Experience</h2>
+            <div class="space-y-8">
+                <div class="card animate-slide-right">
+                    <h3 class="text-2xl font-semibold mb-2 text-card-heading">Machine Learning Intern</h3>
+                    <p class="text-main-dark mb-1">Code Craft Infotech, Pune, Maharashtra, India</p>
+                    <p class="text-main-dark mb-3">June – July 2025</p>
+                    <ul class="list-disc list-inside space-y-2 text-main-dark">
+                        <li>Built a real-time Hand Gesture Recognition System using OpenCV, MediaPipe, and TensorFlow,
+                            achieving 90%+ accuracy in gesture classification for interactive human-computer
+                            interfaces.</li>
+                        <li>Trained a Food Recognition and Calorie Estimation Model using CNNs and transfer learning on
+                            over 10,000 images, estimating nutritional values with 80% precision.</li>
+                        <li>Enhanced model performance by implementing advanced image preprocessing techniques,
+                            including normalization and augmentation, improving usability across diverse lighting
+                            conditions.</li>
+                    </ul>
+                </div>
+                <div class="card animate-slide-left">
+                    <h3 class="text-2xl font-semibold mb-2 text-card-heading">Web Development Intern</h3>
+                    <p class="text-main-dark mb-1">Soft Pro (Virtual Internship/Training), Noida, Uttar Pradesh, India
+                    </p>
+                    <p class="text-main-dark mb-3">September – October 2024</p>
+                    <ul class="list-disc list-inside space-y-2 text-main-dark">
+                        <li>Developed a Career Path Suggestion Tool using HTML, CSS, and JavaScript that matched users
+                            to relevant tech roles based on skill selection.</li>
+                        <li>Designed a dynamic skill-role mapping system with JSON data structures, increasing user
+                            engagement by 30% through an intuitive UI.</li>
+                        <li>Integrated responsive design principles to ensure seamless functionality across desktop and
+                            mobile platforms.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Academic Projects Section -->
+    <section id="projects" class="section-padding" style="background-color: #FBFBEA;">
+        <div class="container animate-fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Academic Projects</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card animate-scale-in">
+                    <h3 class="text-2xl font-semibold mb-2 text-card-heading">Skin Analysis & Color Recommendation
+                        System</h3>
+                    <p class="text-main-dark mb-3">February – May 2025 | Technologies: Python, TensorFlow, Keras,
+                        OpenCV, Flask, Scikit-learn</p>
+                    <ul class="list-disc list-inside space-y-2 text-main-dark">
+                        <li>Engineered a CNN-based deep learning model that classified acne, pigmentation, dark circles,
+                            and skin types with 82% accuracy.</li>
+                        <li>Deployed the model as a Flask web application, supporting live camera feed and image uploads
+                            for real-time skin analysis.</li>
+                        <li>Created a personalized color recommendation engine that suggested suitable fashion and
+                            skincare tones based on detected skin type.</li>
+                        <li>Enabled automatic PDF report generation summarizing findings and recommendations for
+                            end-users.</li>
+                        <li>Designed a clean, interactive UI/UX using HTML/CSS to improve accessibility and user
+                            satisfaction.</li>
+                    </ul>
+                </div>
+                <!-- Add more projects here if available -->
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Technical Skills Section -->
+    <section id="skills" class="section-padding" style="background-color: #FBFBEA;">
+        <div class="container animate-fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Technical Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card animate-slide-right">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Languages</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">R</span>
+                    </div>
+                </div>
+                <div class="card animate-scale-in">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Web Technologies</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">MySQL</span>
+                        <span class="skill-item">HTML</span>
+                        <span class="skill-item">CSS</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">Flask (API)</span>
+                    </div>
+                </div>
+                <div class="card animate-slide-left">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Data Analysis & Tools</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">Pandas</span>
+                        <span class="skill-item">NumPy</span>
+                        <span class="skill-item">Matplotlib</span>
+                        <span class="skill-item">Seaborn</span>
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Tableau</span>
+                    </div>
+                </div>
+                <div class="card animate-slide-right">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Machine Learning</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">Scikit-learn</span>
+                        <span class="skill-item">XGBoost</span>
+                        <span class="skill-item">LightGBM</span>
+                        <span class="skill-item">Regression</span>
+                        <span class="skill-item">Classification</span>
+                        <span class="skill-item">Clustering</span>
+                        <span class="skill-item">EDA</span>
+                        <span class="skill-item">Model Tuning</span>
+                    </div>
+                </div>
+                <div class="card animate-scale-in">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Deep Learning</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">TensorFlow</span>
+                        <span class="skill-item">Keras</span>
+                        <span class="skill-item">CNNs</span>
+                        <span class="skill-item">OpenCV</span>
+                        <span class="skill-item">Image Classification</span>
+                        <span class="skill-item">Transfer Learning</span>
+                    </div>
+                </div>
+                <div class="card animate-slide-left">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Design & UI Tools</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">Figma</span>
+                        <span class="skill-item">Canva</span>
+                        <span class="skill-item">Responsive Web Design</span>
+                    </div>
+                </div>
+                <div class="card animate-slide-right">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Version Control</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">Git</span>
+                        <span class="skill-item">GitHub</span>
+                    </div>
+                </div>
+                <div class="card animate-scale-in">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Development Platforms</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">Jupyter Notebook</span>
+                        <span class="skill-item">Google Colab</span>
+                        <span class="skill-item">VS Code</span>
+                    </div>
+                </div>
+                <div class="card animate-slide-left">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">NLP & GPT Tools</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-item">ChatGPT</span>
+                        <span class="skill-item">Prompt Engineering</span>
+                        <span class="skill-item">NLP Concepts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Additional Information / Contact Section -->
+    <section id="contact" class="section-padding" style="background-color: #FBFBEA;">
+        <div class="container animate-fade-in">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Get in Touch</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left text-main-dark animate-slide-right">
+                    <p class="text-lg mb-4">
+                        I'm always open to new opportunities and collaborations. Feel free to reach out!
+                    </p>
+                    <p class="text-xl mb-2"><i class="fas fa-phone-alt text-accent-dark mr-3"></i> +91 – 8287521198</p>
+                    <p class="text-xl mb-2"><i class="fas fa-envelope text-accent-dark mr-3"></i>
+                        vaishnavisinha476@gmail.com</p>
+                    <div class="flex justify-center md:justify-start space-x-6 mt-6">
+                        <a href="https://github.com/Sinhavaishnavi" target="_blank"
+                            class="text-accent-dark hover:text-gray-700 text-4xl transition duration-300">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vaishnavi-sinha-952111259/" target="_blank"
+                            class="text-accent-dark hover:text-gray-700 text-4xl transition duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card animate-slide-left">
+                    <h3 class="text-2xl font-semibold mb-4 text-card-heading">Additional Information</h3>
+                    <ul class="list-disc list-inside space-y-2 text-main-dark">
+                        <li>Completed the Deloitte Data Analytics Virtual Internship (Forage)</li>
+                        <li>Participated in Shell.ai Hackathon 2025 (Fuel Blend ML Challenge)</li>
+                        <li>Shared educational UI designs and ML project demos on LinkedIn</li>
+                        <li>Active GitHub contributor with end-to-end ML deployment projects</li>
+                        <li>Created and published responsive UI/UX designs for web apps in personal portfolio</li>
+                        <li>Fluent in English and Hindi | Strong verbal and written communication</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white text-main-dark py-8 text-center border-t border-gray-200">
+        <div class="container">
+            <p>&copy; 2025 Vaishnavi Sinha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const animateElements = document.querySelectorAll('.animate-fade-in, .animate-scale-in, .animate-slide-right, .animate-slide-left');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Stop observing once visible to prevent re-triggering
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1, // Trigger when 10% of the element is visible
+            rootMargin: '0px 0px -50px 0px' // Adjust when element is 50px from bottom of viewport
+        });
+
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
